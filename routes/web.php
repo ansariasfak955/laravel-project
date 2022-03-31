@@ -38,9 +38,14 @@ Route::get('/seller/register',function(){
     return view('registerSeller');
 });
 
-Route::get('seller/dashboard',function(){
-    echo 'welcome to seller dashboard';
+Route::get('/seller/dashboard',function(){
+    return view('seller.dashboard');
+})->middleware('redirectSeller');
+
+Route::get('/admin/dashboard',function(){
+    return view('admin.dashboard');
 });
+
 
 Route::post('/register/save-seller', [sellerController::class,'saveSeller']);
 
@@ -49,7 +54,7 @@ Route::get('/login',function(){
 });
 
 
-
+Route::get('/logout',[LoginController::class,'logout_user']);
 Route::post('/login/check_user',[LoginController::class,'check_user']);
 
 

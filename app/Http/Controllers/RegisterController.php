@@ -19,6 +19,8 @@ class RegisterController extends Controller
             'password'=>Hash::make($request->password),
         ]);
 
+        return redirect('/login?status=user-register-success');
+
 
         
         
