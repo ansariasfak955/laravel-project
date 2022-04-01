@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -39,12 +40,21 @@ Route::get('/seller/register',function(){
 });
 
 Route::get('/seller/dashboard',function(){
-    return view('seller.dashboard');
+
+    $data['title'] = 'Seller Dashboard';
+    return view('seller.dashboard',$data);
+    
 })->middleware('redirectSeller');
+
+
+Route::get('/seller/category/add',[CategoryController::class,'index'])->middleware('redirectSeller');
+Route::post('/seller/category/create',[CategoryController::class,'create'])->middleware('redirectSeller');
+
 
 Route::get('/admin/dashboard',function(){
     return view('admin.dashboard');
 });
+
 
 
 Route::post('/register/save-seller', [sellerController::class,'saveSeller']);
